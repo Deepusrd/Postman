@@ -1,0 +1,344 @@
+{
+	"info": {
+		"_postman_id": "b2e94f1a-3c8d-4e7b-a921-d6f2e0c85b47",
+		"name": "Jira Zephyr Essential",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Test Cycle by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{jiraHost}}/rest/zapi/latest/cycle/{{cycleId}}?projectId={{projectId}}",
+					"protocol": "https",
+					"host": [
+						"{{jiraHost}}"
+					],
+					"path": [
+						"rest",
+						"zapi",
+						"latest",
+						"cycle",
+						"{{cycleId}}"
+					],
+					"query": [
+						{
+							"key": "projectId",
+							"value": "{{projectId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test Folder by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{jiraHost}}/rest/zapi/latest/folder/{{folderId}}?cycleId={{cycleId}}&projectId={{projectId}}",
+					"protocol": "https",
+					"host": [
+						"{{jiraHost}}"
+					],
+					"path": [
+						"rest",
+						"zapi",
+						"latest",
+						"folder",
+						"{{folderId}}"
+					],
+					"query": [
+						{
+							"key": "cycleId",
+							"value": "{{cycleId}}"
+						},
+						{
+							"key": "projectId",
+							"value": "{{projectId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test Execution by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{jiraHost}}/rest/zapi/latest/execution/{{executionId}}",
+					"protocol": "https",
+					"host": [
+						"{{jiraHost}}"
+					],
+					"path": [
+						"rest",
+						"zapi",
+						"latest",
+						"execution",
+						"{{executionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Test Execution",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cycleId\": \"{{cycleId}}\",\r\n  \"issueId\": \"{{issueId}}\",\r\n  \"projectId\": \"{{projectId}}\",\r\n  \"versionId\": \"{{versionId}}\",\r\n  \"folderId\": \"{{folderId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{jiraHost}}/rest/zapi/latest/execution",
+					"protocol": "https",
+					"host": [
+						"{{jiraHost}}"
+					],
+					"path": [
+						"rest",
+						"zapi",
+						"latest",
+						"execution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Execution Status",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"status\": {\r\n    \"id\": 1\r\n  },\r\n  \"comment\": \"Test executed via Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{jiraHost}}/rest/zapi/latest/execution/{{executionId}}/execute",
+					"protocol": "https",
+					"host": [
+						"{{jiraHost}}"
+					],
+					"path": [
+						"rest",
+						"zapi",
+						"latest",
+						"execution",
+						"{{executionId}}",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Execution Status by Cycle and Issue",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"status\": {\r\n    \"id\": 2\r\n  },\r\n  \"comment\": \"Updated via Postman automation\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{jiraHost}}/rest/zapi/latest/execution/{{executionId}}/execute?cycleId={{cycleId}}&issueId={{issueId}}&projectId={{projectId}}",
+					"protocol": "https",
+					"host": [
+						"{{jiraHost}}"
+					],
+					"path": [
+						"rest",
+						"zapi",
+						"latest",
+						"execution",
+						"{{executionId}}",
+						"execute"
+					],
+					"query": [
+						{
+							"key": "cycleId",
+							"value": "{{cycleId}}"
+						},
+						{
+							"key": "issueId",
+							"value": "{{issueId}}"
+						},
+						{
+							"key": "projectId",
+							"value": "{{projectId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bulk Update Execution Status",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"executions\": [\r\n    {\r\n      \"id\": \"{{executionId}}\",\r\n      \"status\": {\r\n        \"id\": 1\r\n      }\r\n    }\r\n  ],\r\n  \"status\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{jiraHost}}/rest/zapi/latest/execution/updateBulkStatus",
+					"protocol": "https",
+					"host": [
+						"{{jiraHost}}"
+					],
+					"path": [
+						"rest",
+						"zapi",
+						"latest",
+						"execution",
+						"updateBulkStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{jiraEmail}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{jiraApiToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "jiraHost",
+			"value": "yourcompany.atlassian.net",
+			"type": "string"
+		},
+		{
+			"key": "projectId",
+			"value": "10001",
+			"type": "string"
+		},
+		{
+			"key": "cycleId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "folderId",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"key": "executionId",
+			"value": "100",
+			"type": "string"
+		},
+		{
+			"key": "issueId",
+			"value": "10050",
+			"type": "string"
+		},
+		{
+			"key": "versionId",
+			"value": "-1",
+			"type": "string"
+		},
+		{
+			"key": "jiraEmail",
+			"value": "your-email@company.com",
+			"type": "string"
+		},
+		{
+			"key": "jiraApiToken",
+			"value": "{{add your API token here}}",
+			"type": "string"
+		}
+	]
+}
